@@ -6,11 +6,11 @@
 /*   By: bleon-ba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 17:46:35 by bleon-ba          #+#    #+#             */
-/*   Updated: 2021/09/29 18:30:19 by bleon-ba         ###   ########.fr       */
+/*   Updated: 2021/09/29 18:51:47 by bleon-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_printf.h>
+#include "ft_printf.h"
 
 void	ft_putchar_fd(char c, int fd, int *len)
 {
@@ -64,24 +64,24 @@ void	ft_putstr_fd(char *s, int fd, int *len)
 
 int	ft_printf(const char *str, ...)
 {
-	va_list	list;
+	va_list	parameters;
 	int		len;
 	int		i;
 
 	i = 0;
 	len = 0;
-	va_start(list, str);
+	va_start(parameters, str);
 	while (str[i] != '\0')
 	{
 		if (str[i] == '%')
 		{
 			i++;
-			ft_flags(str[i], list, &len);
+			ft_flags(str[i], parameters, &len);
 		}
 		else
 			ft_putchar_fd(str[i], 1, len);
 		i++:
 	}
-	va_end(list);
+	va_end(parameters);
 	return (len);
 }
