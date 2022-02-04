@@ -1,2 +1,4 @@
 *.swp
 printfTester
+*.DS_Store
+
