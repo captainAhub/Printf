@@ -6,7 +6,7 @@
 /*   By: bleon-ba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 18:33:14 by bleon-ba          #+#    #+#             */
-/*   Updated: 2022/02/04 12:35:13 by bleon-ba         ###   ########.fr       */
+/*   Updated: 2022/02/04 13:29:45 by bleon-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_baseconvert(unsigned long int nbr, int base, int *len)
 		if (nbr % base < 10)
 			ft_putnbr_fd(nbr % base, 1, len);
 		else
-			ft_putchar_fd(nbr %  base + 87, 1, len);
+			ft_putchar_fd(nbr % base + 87, 1, len);
 	}
 	else
 	{
@@ -53,7 +53,7 @@ void	ft_baseconvertup(unsigned int nbr, int base, int *len)
 void	ft_flags(char flag, va_list list, int *len)
 {
 	if (flag == 'c')
-		ft_putchar_fd(va_arg(list, int), 1, len); 
+		ft_putchar_fd(va_arg(list, int), 1, len);
 	else if (flag == 's')
 		ft_putstr_fd(va_arg(list, char *), 1, len);
 	else if (flag == 'p')
