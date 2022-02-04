@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bleon-ba <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bleon-ba <bleon-ba@student.42urduli>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/29 17:46:35 by bleon-ba          #+#    #+#             */
-/*   Updated: 2021/09/29 18:51:47 by bleon-ba         ###   ########.fr       */
+/*   Created: 2021/10/06 12:31:58 by bleon-ba          #+#    #+#             */
+/*   Updated: 2021/10/18 18:06:15 by bleon-ba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,17 @@ void	ft_putchar_fd(char c, int fd, int *len)
 
 void	ft_putnbr_fd(int n, int fd, int *len)
 {
-	if (n == -2147483648)
-	{
-		ft_putnbr_fd((n/10), fd, len);
-		ft_putchar_fd('8', fd, len);
-	}
-	else if (n < 0)
+	long	number;
+
+	number = n;
+	while (number < 0)
 	{
 		ft_putchar_fd('-', fd, len);
-		ft_putnbr_fd(-n, fd, len);
+		number = number * -1;
 	}
-	else
-	{
-		if (n > 9)
-			ft_putnbr_fd(n / 10, fd, len);
-		ft_putchar_fd(n % 10 + '0', fd, len);
-	}
+	if (number >= 10)
+		ft_putnbr_fd (number / 10, fd, len);
+	ft_putchar_fd ((number % 10) + '0', fd, len);
 }
 
 void	ft_putuns_fd(int n, int fd, int *len)
@@ -43,7 +38,7 @@ void	ft_putuns_fd(int n, int fd, int *len)
 	unsigned int	num;
 
 	num = n;
-	if (num > 9)
+	if (num >= 10)
 		ft_putnbr_fd(num / 10, fd, len);
 	ft_putchar_fd((num % 10) + '0', fd, len);
 }
@@ -55,7 +50,7 @@ void	ft_putstr_fd(char *s, int fd, int *len)
 	if (!s)
 		s = "(null)";
 	i = 0;
-	while (s)
+	while (s[i] != '\0')
 	{
 		ft_putchar_fd(s[i], fd, len);
 		i++;
@@ -79,8 +74,8 @@ int	ft_printf(const char *str, ...)
 			ft_flags(str[i], parameters, &len);
 		}
 		else
-			ft_putchar_fd(str[i], 1, len);
-		i++:
+			ft_putchar_fd(str[i], 1, &len);
+		i++;
 	}
 	va_end(parameters);
 	return (len);
